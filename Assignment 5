@@ -1,0 +1,83 @@
+Write a program in C to perform basic matrix operations such as:
+1. Addition of two matrices
+2. Saddle point of a matrix
+3. Inverse of a matrix
+4. Magic square of a matrix
+
+#include <stdio.h>
+
+int main() {
+    int ch,i,j,r,c,n,a[10][10],b[10][10],sum,det;
+
+    printf("1.Add 2.Saddle 3.Inverse(2x2) 4.Magic\n");
+    scanf("%d",&ch);
+
+    switch(ch) {
+
+    case 1: // Addition
+        scanf("%d%d",&r,&c);
+        for(i=0;i<r;i++)
+            for(j=0;j<c;j++) scanf("%d",&a[i][j]);
+        for(i=0;i<r;i++)
+            for(j=0;j<c;j++) scanf("%d",&b[i][j]);
+
+        for(i=0;i<r;i++){
+            for(j=0;j<c;j++)
+                printf("%d ",a[i][j]+b[i][j]);
+            printf("\n");
+        }
+        break;
+
+    case 2: // Saddle
+        scanf("%d%d",&r,&c);
+        for(i=0;i<r;i++)
+            for(j=0;j<c;j++) scanf("%d",&a[i][j]);
+
+        for(i=0;i<r;i++){
+            int min=a[i][0],col=0;
+            for(j=1;j<c;j++)
+                if(a[i][j]<min){min=a[i][j];col=j;}
+
+            for(j=0;j<r;j++)
+                if(a[j][col]>min) break;
+
+            if(j==r){printf("Saddle=%d",min);return 0;}
+        }
+        printf("No Saddle");
+        break;
+
+    case 3: // Inverse 2x2
+        for(i=0;i<2;i++)
+            for(j=0;j<2;j++) scanf("%d",&a[i][j]);
+
+        det=a[0][0]*a[1][1]-a[0][1]*a[1][0];
+
+        if(det==0) printf("No inverse");
+        else{
+            printf("%.2f %.2f\n",a[1][1]/(float)det,-a[0][1]/(float)det);
+            printf("%.2f %.2f\n",-a[1][0]/(float)det,a[0][0]/(float)det);
+        }
+        break;
+
+    case 4: // Magic
+        scanf("%d",&n);
+        for(i=0;i<n;i++)
+            for(j=0;j<n;j++) scanf("%d",&a[i][j]);
+
+        sum=0;
+        for(j=0;j<n;j++) sum+=a[0][j];
+
+        for(i=0;i<n;i++){
+            int s=0;
+            for(j=0;j<n;j++) s+=a[i][j];
+            if(s!=sum){printf("Not Magic");return 0;}
+        }
+
+        printf("Magic");
+        break;
+
+    default:
+        printf("Invalid");
+    }
+    return 0;
+}
