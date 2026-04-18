@@ -1,0 +1,37 @@
+Write a program in C to accept marks of five courses of a student and compute the result. A student is considered PASS if he/she scores 40 marks or more in each course. If the student passes, calculate the aggregate percentage and assign the grade as follows:
+Aggregate ≥ 75% : Distinction
+
+Aggregate ≥ 60% and < 75% : First Division
+
+Aggregate ≥ 50% and < 60% : Second Division
+
+Aggregate ≥ 40% and < 50% : Third Division
+
+
+#include <stdio.h>
+
+int main() {
+    int m1, m2, m3, m4, m5;
+    float avg;
+
+    printf("Enter marks of 5 subjects: ");
+    scanf("%d%d%d%d%d", &m1, &m2, &m3, &m4, &m5);
+
+    if(m1<40 || m2<40 || m3<40 || m4<40 || m5<40) {
+        printf("FAIL");
+    } else {
+        avg = (m1+m2+m3+m4+m5)/5.0;
+        printf("Percentage = %.2f\n", avg);
+
+        if(avg >= 75)
+            printf("Distinction");
+        else if(avg >= 60)
+            printf("First Division");
+        else if(avg >= 50)
+            printf("Second Division");
+        else
+            printf("Third Division");
+    }
+
+    return 0;
+}
