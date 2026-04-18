@@ -1,0 +1,44 @@
+Write a C program that accepts a string from the user and performs the following string operations: i) Calculate length of string ii) String reversal iii) Equality check of two strings iv) Check palindrome v) Check substring.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100], str2[100], rev[100];
+    int i, len;
+
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    // i) Length
+    len = strlen(str);
+    printf("Length = %d\n", len);
+
+    // ii) Reverse
+    for(i = 0; i < len; i++)
+        rev[i] = str[len - i - 1];
+    rev[len] = '\0';
+    printf("Reverse = %s\n", rev);
+
+    // iii) Equality
+    printf("Enter another string: ");
+    scanf("%s", str2);
+    if(strcmp(str, str2) == 0)
+        printf("Strings are Equal\n");
+    else
+        printf("Strings are Not Equal\n");
+
+    // iv) Palindrome
+    if(strcmp(str, rev) == 0)
+        printf("Palindrome\n");
+    else
+        printf("Not Palindrome\n");
+
+    // v) Substring
+    if(strstr(str, str2))
+        printf("Substring Found\n");
+    else
+        printf("Substring Not Found\n");
+
+    return 0;
+}
